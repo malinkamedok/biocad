@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  biocad_psql:
+    image: postgres:14-alpine3.14
+    container_name: "biocad_psql"
+    volumes:
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      POSTGRES_PASSWORD: ${BIOCAD_DB_PASSWORD}
+      POSTGRES_USER: ${BIOCAD_DB_USERNAME}
+      POSTGRES_DB: ${BIOCAD_DB_NAME}
+    env_file:
+      - .env
