@@ -12,3 +12,16 @@ services:
       POSTGRES_DB: ${BIOCAD_DB_NAME}
     env_file:
       - .env
+
+  server:
+    container_name: "server"
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - biocad_psql
+    environment:
+      POSTGRES_URL: ${BIOCAD_DB_URL}
+    env_file:
+      - .env
