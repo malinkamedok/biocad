@@ -5,6 +5,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func NewRouter(handler *chi.Mux, u usecase.UserContract) {
+func NewRouter(handler *chi.Mux, u usecase.UserContract, p usecase.ParserContract) {
 
 }

@@ -2,13 +2,13 @@ package main
 
 import (
 	"biocad/internal/app"
-	"biocad/internal/configs"
+	"biocad/internal/config"
 	"log"
 )
 
 func main() {
 
-	cfg, err := configs.NewConfig()
+	cfg, err := config.NewConfig()
 	if err != nil {
 		log.Fatalf("Error in config parsing: %s\n", err)
 	}

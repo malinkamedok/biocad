@@ -5,7 +5,9 @@ go 1.20
 require (
 	github.com/Masterminds/squirrel v1.5.4 // indirect
 	github.com/caarlos0/env/v7 v7.1.0 // indirect
+	github.com/dogenzaka/tsv v0.0.0-20150215104501-8e02e611b1fb // indirect
 	github.com/go-chi/chi/v5 v5.0.8 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.14.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect

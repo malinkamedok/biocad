@@ -1,7 +1,7 @@
 package app
 
 import (
-	"biocad/internal/configs"
+	"biocad/internal/config"
 	v1 "biocad/internal/controller/http/v1"
 	"biocad/internal/usecase"
 	"biocad/internal/usecase/repo"
@@ -14,7 +14,7 @@ import (
 	"syscall"
 )
 
-func Run(cfg *configs.Config) {
+func Run(cfg *config.Config) {
 
 	pg, err := postgres.New(cfg)
 	if err != nil {
@@ -22,10 +22,13 @@ func Run(cfg *configs.Config) {
 	}
 
 	u := usecase.NewUserUseCase(repo.NewUserRepo(pg))
+	p := usecase.NewParserUseCase(repo.NewParserRepo(pg))
 
 	handler := chi.NewRouter()
 
-	v1.NewRouter(handler, u)
+	v1.NewRouter(handler, u, p)
+
+	err = p.QueueManager(cfg.DirAddress)
 
 	serv := httpserver.New(handler, httpserver.Port(cfg.AppPort))
 	interruption := make(chan os.Signal, 1)

@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"biocad/internal/configs"
+	"biocad/internal/config"
 	"context"
 	"fmt"
 	"github.com/Masterminds/squirrel"
@@ -25,7 +25,7 @@ type Postgres struct {
 	Pool    *pgxpool.Pool
 }
 
-func New(cfg *configs.Config) (*Postgres, error) {
+func New(cfg *config.Config) (*Postgres, error) {
 	pg := &Postgres{
 		maxPoolSize:  _defaultMaxPoolSize,
 		connAttempts: _defaultConnAttempts,
