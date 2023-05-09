@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 )
 
 func Run(cfg *config.Config) {
@@ -26,9 +27,19 @@ func Run(cfg *config.Config) {
 
 	handler := chi.NewRouter()
 
-	v1.NewRouter(handler, u, p)
+	v1.NewRouter(handler, u)
 
-	err = p.QueueManager(cfg.DirAddress)
+	go func() {
+		for {
+			err := p.QueueManager(cfg.DirAddress, cfg.PDFSaveAddr, cfg.FontAddress)
+			if err != nil {
+				log.Println("Some error occurred")
+			}
+			time.Sleep(30 * time.Second)
+		}
+	}()
+
+	log.Println("parsing ended")
 
 	serv := httpserver.New(handler, httpserver.Port(cfg.AppPort))
 	interruption := make(chan os.Signal, 1)

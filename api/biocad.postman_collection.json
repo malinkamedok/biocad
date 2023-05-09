@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "5576b8a9-dc16-4c10-8456-0ede7dde0e2d",
+		"name": "biocad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24394459"
+	},
+	"item": [
+		{
+			"name": "getGUIDList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/data/get-guid-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"data",
+						"get-guid-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDataByGUID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/data/01749246-95f6-57db-b7c3-2ae0e8be671f/2/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"data",
+						"01749246-95f6-57db-b7c3-2ae0e8be671f",
+						"2",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -12,7 +12,7 @@ create table if not exists data (
     msg_text text not null,
     context text,
     class varchar(7) not null,
-    level integer not null,
+    level text not null,
     area varchar(5) not null,
     addr text not null,
     block text,
@@ -24,6 +24,7 @@ create table if not exists data (
 create table if not exists processed_data (
     id serial primary key,
     file_name text not null,
+    failure bool not null default false,
     is_processed bool not null default false,
     date_processed timestamp
 )

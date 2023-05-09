@@ -14,17 +14,29 @@ services:
       POSTGRES_DB: ${BIOCAD_DB_NAME}
     env_file:
       - .env
+    healthcheck:
+      test: [ 'CMD-SHELL', "sh -c 'pg_isready -U ${BIOCAD_DB_USERNAME} -d ${BIOCAD_DB_NAME}'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   server:
     container_name: "server"
     build:
       context: ./
       dockerfile: Dockerfile
+
     ports:
       - "9000:9000"
     depends_on:
-      - biocad_psql
+      biocad_psql:
+        condition: service_healthy
     environment:
       POSTGRES_URL: ${BIOCAD_DB_URL}
     env_file:
       - .env
+    user: "1000"
+    volumes:
+      - ${DIR_ADDRESS?Specify directory}:${DIR_ADDRESS}
+      - ${PDF_DIR_ADDRESS?Specify pdf directory}:${PDF_DIR_ADDRESS}
+      - ${FONT_DIR_ADDRESS?Specify fonts directory}:${FONT_DIR_ADDRESS}
